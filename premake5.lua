@@ -1,12 +1,3 @@
-workspace "Test"
-
-    configurations {
-        "Debug",
-        "Release"
-    }
-
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-
 project "GLFW"
     kind "StaticLib"
     language "C"
@@ -62,26 +53,3 @@ project "GLFW"
     filter "configurations:Release"
         runtime "Release"
         optimize "speed"
-
-
-project "Test"
-    kind "ConsoleApp"
-    language "c++"
-    cppdialect "c++17"
-    staticruntime "off"
-    
-    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
-
-    filter "system:windows"
-        systemversion "latest"
-
-    filter "configurations:Debug"
-        runtime "Debug"
-        optimize "Off"
-        symbols "Default"
-
-    filter "configurations:Release"
-        runtime "Release"
-        optimize "On"
-        symbols "Default"
